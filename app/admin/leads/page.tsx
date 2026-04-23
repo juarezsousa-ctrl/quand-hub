@@ -29,10 +29,6 @@ export default function LeadsPage() {
   const [statusFilter, setStatusFilter] = useState<string>('')
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null)
 
-  useEffect(() => {
-    fetchLeads()
-  }, [])
-
   const fetchLeads = async () => {
     try {
       const response = await fetch('/api/leads')
@@ -41,11 +37,19 @@ export default function LeadsPage() {
         setLeads(data)
       }
     } catch (error) {
-      console.error('[v0] Failed to fetch leads:', error)
+      console.error('[ADMIN] Falha ao buscar leads:', error)
     } finally {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      void fetchLeads()
+    }, 0)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [])
 
   const updateLeadStatus = async (leadId: string, status: LeadStatus) => {
     try {
@@ -64,7 +68,7 @@ export default function LeadsPage() {
         }
       }
     } catch (error) {
-      console.error('[v0] Failed to update lead:', error)
+      console.error('[ADMIN] Falha ao atualizar lead:', error)
     }
   }
 

@@ -78,25 +78,22 @@ export async function setActiveCohort(id: string): Promise<Cohort[]> {
     return cohorts
   }
 
-  await Promise.all(
-    cohorts.map(cohort => {
-      if (cohort.id === id) {
-        return inMemoryRepository.cohort.update(cohort.id, {
-          status: COHORT_STATUS.OPEN,
-          updatedAt: new Date(),
-        })
-      }
+  for (const cohort of cohorts) {
+    if (cohort.id === id) {
+      await inMemoryRepository.cohort.update(cohort.id, {
+        status: COHORT_STATUS.OPEN,
+        updatedAt: new Date(),
+      })
+      continue
+    }
 
-      if (cohort.status === COHORT_STATUS.OPEN) {
-        return inMemoryRepository.cohort.update(cohort.id, {
-          status: COHORT_STATUS.UPCOMING,
-          updatedAt: new Date(),
-        })
-      }
-
-      return Promise.resolve(cohort)
-    })
-  )
+    if (cohort.status === COHORT_STATUS.OPEN) {
+      await inMemoryRepository.cohort.update(cohort.id, {
+        status: COHORT_STATUS.UPCOMING,
+        updatedAt: new Date(),
+      })
+    }
+  }
 
   return getAllCohorts()
 }

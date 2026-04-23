@@ -43,7 +43,7 @@ export default function LandingPage() {
           }
         }
       } catch (error) {
-        console.error('[v0] Failed to load landing data:', error)
+        console.error('[LANDING] Falha ao carregar dados da landing:', error)
       } finally {
         setIsLoading(false)
       }

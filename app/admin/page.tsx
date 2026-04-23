@@ -13,6 +13,7 @@ import {
 import Link from 'next/link'
 import type { Lead, Cohort, FAQ, Testimonial } from '@/src/domain/entities'
 import type { ApiResponse } from '@/src/infrastructure/api/response'
+import { BRAND } from '@/src/application/config/branding'
 import { COHORT_STATUS, LEAD_STATUS, LEAD_STATUS_LABELS } from '@/src/application/config/constants'
 import { formatCohortDateRange, resolveActiveCohort } from '@/src/application/utils/cohort'
 
@@ -53,7 +54,7 @@ export default function AdminDashboard() {
 
         setData({ leads, cohorts, faqs, testimonials })
       } catch (error) {
-        console.error('[v0] Failed to fetch dashboard data:', error)
+        console.error('[ADMIN] Falha ao carregar dados do dashboard:', error)
       } finally {
         setIsLoading(false)
       }
@@ -135,7 +136,7 @@ export default function AdminDashboard() {
       <div>
         <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
         <p className="text-muted-foreground">
-          Visão geral do QUAND HUB
+          Visão geral do {BRAND.name}
         </p>
       </div>
 

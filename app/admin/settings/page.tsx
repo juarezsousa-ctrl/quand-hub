@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Settings, Lock, Users, Bell, Save, Shield, Key } from 'lucide-react'
+import { Settings, Lock, Bell, Save, Shield, Key } from 'lucide-react'
+import { BRAND } from '@/src/application/config/branding'
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState('general')
@@ -51,7 +52,7 @@ export default function SettingsPage() {
                   <label className="text-sm font-medium mb-1.5 block">Nome da Plataforma</label>
                   <input
                     type="text"
-                    defaultValue="QUAND HUB"
+                    defaultValue={BRAND.name}
                     className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                   />
                 </div>
@@ -59,7 +60,7 @@ export default function SettingsPage() {
                   <label className="text-sm font-medium mb-1.5 block">Slogan</label>
                   <input
                     type="text"
-                    defaultValue="Quem Aprende Não Depende"
+                    defaultValue={BRAND.slogan}
                     className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                   />
                 </div>
@@ -67,7 +68,7 @@ export default function SettingsPage() {
                   <label className="text-sm font-medium mb-1.5 block">Email de Contato</label>
                   <input
                     type="email"
-                    defaultValue="contato@quandhub.com"
+                    defaultValue={BRAND.contact.email}
                     className="w-full px-4 py-3 rounded-xl bg-muted border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                   />
                 </div>
@@ -88,10 +89,10 @@ export default function SettingsPage() {
             <div className="p-4 bg-chart-4/10 border border-chart-4/20 rounded-xl">
               <div className="flex items-center gap-3 mb-2">
                 <Lock className="w-5 h-5 text-chart-4" />
-                <h4 className="font-semibold text-chart-4">Autenticação em desenvolvimento</h4>
+                <h4 className="font-semibold text-chart-4">Base de autenticação preparada</h4>
               </div>
               <p className="text-sm text-muted-foreground">
-                O sistema de autenticação completo será implementado em breve, incluindo login com Google e Microsoft.
+                O admin já está protegido por sessão segura. Os próximos passos previstos incluem provedores Google e Microsoft.
               </p>
             </div>
 

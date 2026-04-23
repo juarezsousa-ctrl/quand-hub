@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { 
@@ -13,9 +13,11 @@ import {
   Menu,
   X,
   Sparkles,
-  LogOut
+  Home
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { AdminLogoutButton } from '@/components/admin/admin-logout-button'
+import { ADMIN_PAGE_TITLES, BRAND } from '@/src/application/config/branding'
 
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
@@ -33,6 +35,16 @@ export default function AdminLayout({
 }) {
   const pathname = usePathname()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const isLoginPage = pathname === '/admin/login'
+
+  useEffect(() => {
+    const sectionTitle = ADMIN_PAGE_TITLES[pathname] ?? 'Admin'
+    document.title = `${sectionTitle} | ${BRAND.name}`
+  }, [pathname])
+
+  if (isLoginPage) {
+    return <div className="min-h-screen bg-background">{children}</div>
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -42,7 +54,7 @@ export default function AdminLayout({
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
             <Sparkles className="w-4 h-4 text-primary-foreground" />
           </div>
-          <span className="font-bold">QUAND HUB</span>
+          <span className="font-bold">{BRAND.name}</span>
         </Link>
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -65,7 +77,7 @@ export default function AdminLayout({
             <Sparkles className="w-5 h-5 text-primary-foreground" />
           </div>
           <div>
-            <span className="font-bold block leading-none">QUAND HUB</span>
+            <span className="font-bold block leading-none">{BRAND.name}</span>
             <span className="text-[10px] text-muted-foreground">Admin</span>
           </div>
         </div>
@@ -96,13 +108,16 @@ export default function AdminLayout({
 
         {/* Bottom */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border">
-          <Link
-            href="/"
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground transition-all"
-          >
-            <LogOut className="w-5 h-5" />
-            <span className="font-medium">Voltar ao site</span>
-          </Link>
+          <div className="space-y-1">
+            <Link
+              href={BRAND.urls.home}
+              className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground transition-all"
+            >
+              <Home className="w-5 h-5" />
+              <span className="font-medium">Voltar ao site</span>
+            </Link>
+            <AdminLogoutButton />
+          </div>
         </div>
       </aside>
 

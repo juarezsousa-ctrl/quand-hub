@@ -25,10 +25,6 @@ export default function FAQsPage() {
     isActive: true,
   })
 
-  useEffect(() => {
-    fetchFaqs()
-  }, [])
-
   const fetchFaqs = async () => {
     try {
       const response = await fetch('/api/admin/faqs')
@@ -37,11 +33,19 @@ export default function FAQsPage() {
         setFaqs(data)
       }
     } catch (error) {
-      console.error('[v0] Failed to fetch FAQs:', error)
+      console.error('[ADMIN] Falha ao buscar FAQs:', error)
     } finally {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      void fetchFaqs()
+    }, 0)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [])
 
   const handleCreate = async () => {
     try {
@@ -57,7 +61,7 @@ export default function FAQsPage() {
         setFormData({ question: '', answer: '', order: faqs.length + 1, isActive: true })
       }
     } catch (error) {
-      console.error('[v0] Failed to create FAQ:', error)
+      console.error('[ADMIN] Falha ao criar FAQ:', error)
     }
   }
 
@@ -77,7 +81,7 @@ export default function FAQsPage() {
         setFormData({ question: '', answer: '', order: 1, isActive: true })
       }
     } catch (error) {
-      console.error('[v0] Failed to update FAQ:', error)
+      console.error('[ADMIN] Falha ao atualizar FAQ:', error)
     }
   }
 
@@ -93,7 +97,7 @@ export default function FAQsPage() {
         await fetchFaqs()
       }
     } catch (error) {
-      console.error('[v0] Failed to delete FAQ:', error)
+      console.error('[ADMIN] Falha ao remover FAQ:', error)
     }
   }
 
@@ -111,7 +115,7 @@ export default function FAQsPage() {
         )
       }
     } catch (error) {
-      console.error('[v0] Failed to toggle FAQ:', error)
+      console.error('[ADMIN] Falha ao alternar status da FAQ:', error)
     }
   }
 

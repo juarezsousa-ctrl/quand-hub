@@ -2,6 +2,8 @@
 // QUAND HUB - Application Constants
 // =============================================================================
 
+import { BRAND, BRAND_SOCIAL_LINKS, BRAND_TITLE } from './branding'
+
 // -----------------------------------------------------------------------------
 // Lead Status
 // -----------------------------------------------------------------------------
@@ -126,6 +128,8 @@ export const API_MESSAGES = {
     TESTIMONIAL_CREATED: 'Depoimento criado com sucesso',
     TESTIMONIAL_UPDATED: 'Depoimento atualizado com sucesso',
     TESTIMONIAL_DELETED: 'Depoimento removido com sucesso',
+    AUTHENTICATED: 'Login realizado com sucesso',
+    LOGGED_OUT: 'Logout realizado com sucesso',
   },
   ERROR: {
     NOT_FOUND: 'Recurso não encontrado',
@@ -133,6 +137,8 @@ export const API_MESSAGES = {
     INTERNAL_ERROR: 'Erro interno do servidor',
     UNAUTHORIZED: 'Não autorizado',
     DUPLICATE_EMAIL: 'E-mail já cadastrado',
+    INVALID_CREDENTIALS: 'E-mail ou senha inválidos',
+    AUTH_NOT_CONFIGURED: 'Autenticação do admin ainda não foi configurada',
   },
 } as const
 
@@ -186,18 +192,18 @@ export const FEATURE_ICONS = {
 // Social Links
 // -----------------------------------------------------------------------------
 export const SOCIAL_LINKS = {
-  INSTAGRAM: 'https://instagram.com/quandhub',
+  INSTAGRAM: BRAND_SOCIAL_LINKS[0].url,
   WHATSAPP: 'https://wa.me/5511999999999',
-  YOUTUBE: 'https://youtube.com/@quandhub',
-  LINKEDIN: 'https://linkedin.com/company/quandhub',
+  YOUTUBE: BRAND_SOCIAL_LINKS[2].url,
+  LINKEDIN: BRAND_SOCIAL_LINKS[1].url,
 } as const
 
 // -----------------------------------------------------------------------------
 // Meta / SEO
 // -----------------------------------------------------------------------------
 export const META = {
-  TITLE: 'QUAND HUB - Quem Aprende Não Depende',
-  DESCRIPTION: 'Aprenda a usar IA para transformar processos manuais em sistemas simples, profissionais e úteis para o seu negócio.',
+  TITLE: BRAND_TITLE,
+  DESCRIPTION: BRAND.shortInstitutionalDescription,
   KEYWORDS: 'IA, inteligência artificial, automação, negócios, empreendedorismo, cursos',
   OG_IMAGE: '/images/og-image.jpg',
 } as const

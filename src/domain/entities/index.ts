@@ -151,6 +151,22 @@ export interface SocialLink {
 }
 
 // -----------------------------------------------------------------------------
+// Authentication
+// -----------------------------------------------------------------------------
+
+export type AuthProvider = 'credentials' | 'google' | 'microsoft'
+
+export type AdminRole = 'super_admin'
+
+export interface AdminSession {
+  email: string
+  role: AdminRole
+  provider: AuthProvider
+  issuedAt: number
+  expiresAt: number
+}
+
+// -----------------------------------------------------------------------------
 // Utility Types
 // -----------------------------------------------------------------------------
 

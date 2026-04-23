@@ -1,15 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { Menu, X, Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
-
-const navLinks = [
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Aulas', href: '#aulas' },
-  { label: 'Método', href: '#metodo' },
-  { label: 'FAQ', href: '#faq' },
-]
+import { BRAND, LANDING_NAV_LINKS } from '@/src/application/config/branding'
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -41,19 +36,19 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2 group">
+          <Link href={BRAND.urls.home} className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center group-hover:scale-110 transition-transform">
               <Sparkles className="w-5 h-5 text-primary-foreground" />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-lg leading-none">QUAND HUB</span>
-              <span className="text-[10px] text-muted-foreground leading-none mt-0.5">Quem Aprende Não Depende</span>
+              <span className="font-bold text-lg leading-none">{BRAND.name}</span>
+              <span className="text-[10px] text-muted-foreground leading-none mt-0.5">{BRAND.slogan}</span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {LANDING_NAV_LINKS.map((link) => (
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
@@ -67,12 +62,12 @@ export function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="/admin"
+            <Link
+              href={BRAND.urls.admin}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               Admin
-            </a>
+            </Link>
             <button
               onClick={() => scrollToSection('#inscricao')}
               className="px-5 py-2.5 bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:shadow-lg hover:shadow-primary/30 transition-all hover:-translate-y-0.5"
@@ -103,7 +98,7 @@ export function Header() {
         )}
       >
         <div className="container mx-auto px-4 py-4 space-y-2">
-          {navLinks.map((link) => (
+          {LANDING_NAV_LINKS.map((link) => (
             <button
               key={link.href}
               onClick={() => scrollToSection(link.href)}

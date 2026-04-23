@@ -12,6 +12,7 @@ import type {
   LandingPageData,
 } from '@/src/domain/entities'
 
+import { BRAND, BRAND_SOCIAL_LINKS, BRAND_TITLE } from '@/src/application/config/branding'
 import { LEAD_STATUS, LEAD_SOURCE, COHORT_STATUS } from '@/src/application/config/constants'
 
 // -----------------------------------------------------------------------------
@@ -343,8 +344,8 @@ const benefits: Benefit[] = [
 
 const landingPage: LandingPageData = {
   id: 'landing-001',
-  heroTitle: 'Quem Aprende Não Depende',
-  heroSubtitle: 'Aprenda a usar IA para transformar processos manuais em sistemas simples, profissionais e úteis para o seu negócio.',
+  heroTitle: BRAND.slogan,
+  heroSubtitle: BRAND.shortInstitutionalDescription,
   mainCTA: 'Quero participar',
   finalCTATitle: 'Pronto para transformar seus processos com IA?',
   finalCTA: 'Garantir minha vaga',
@@ -413,12 +414,8 @@ const landingPage: LandingPageData = {
       order: 4,
     },
   ],
-  footerText: 'QUAND HUB - Quem Aprende Não Depende',
-  socialLinks: [
-    { platform: 'Instagram', url: 'https://instagram.com/quandhub', icon: 'Instagram' },
-    { platform: 'LinkedIn', url: 'https://linkedin.com/company/quandhub', icon: 'Linkedin' },
-    { platform: 'YouTube', url: 'https://youtube.com/@quandhub', icon: 'Youtube' },
-  ],
+  footerText: BRAND_TITLE,
+  socialLinks: [...BRAND_SOCIAL_LINKS],
   updatedAt: new Date('2026-01-01'),
 }
 

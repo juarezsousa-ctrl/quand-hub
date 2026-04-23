@@ -28,10 +28,6 @@ export default function TestimonialsPage() {
     isFeatured: false,
   })
 
-  useEffect(() => {
-    fetchTestimonials()
-  }, [])
-
   const fetchTestimonials = async () => {
     try {
       const response = await fetch('/api/admin/testimonials')
@@ -40,11 +36,19 @@ export default function TestimonialsPage() {
         setTestimonials(data)
       }
     } catch (error) {
-      console.error('[v0] Failed to fetch testimonials:', error)
+      console.error('[ADMIN] Falha ao buscar depoimentos:', error)
     } finally {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      void fetchTestimonials()
+    }, 0)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [])
 
   const handleCreate = async () => {
     try {
@@ -60,7 +64,7 @@ export default function TestimonialsPage() {
         setFormData({ name: '', role: '', company: '', content: '', rating: 5, isActive: true, isFeatured: false })
       }
     } catch (error) {
-      console.error('[v0] Failed to create testimonial:', error)
+      console.error('[ADMIN] Falha ao criar depoimento:', error)
     }
   }
 
@@ -80,7 +84,7 @@ export default function TestimonialsPage() {
         setFormData({ name: '', role: '', company: '', content: '', rating: 5, isActive: true, isFeatured: false })
       }
     } catch (error) {
-      console.error('[v0] Failed to update testimonial:', error)
+      console.error('[ADMIN] Falha ao atualizar depoimento:', error)
     }
   }
 
@@ -96,7 +100,7 @@ export default function TestimonialsPage() {
         await fetchTestimonials()
       }
     } catch (error) {
-      console.error('[v0] Failed to delete testimonial:', error)
+      console.error('[ADMIN] Falha ao remover depoimento:', error)
     }
   }
 
@@ -114,7 +118,7 @@ export default function TestimonialsPage() {
         )
       }
     } catch (error) {
-      console.error('[v0] Failed to toggle featured:', error)
+      console.error('[ADMIN] Falha ao alternar destaque do depoimento:', error)
     }
   }
 

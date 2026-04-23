@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { Bot, Sparkles, Zap, Check } from 'lucide-react'
+import { BRAND } from '@/src/application/config/branding'
 
 const codeLines = [
   '> Analisando processo...',
@@ -71,7 +72,7 @@ export function AIScreenMockup() {
             <div className="w-3 h-3 rounded-full bg-chart-3/60" />
           </div>
           <div className="flex-1 text-center">
-            <span className="text-xs text-muted-foreground font-mono">QUAND HUB - Sistema IA</span>
+            <span className="text-xs text-muted-foreground font-mono">{BRAND.aiSystemLabel}</span>
           </div>
           <Bot className="w-4 h-4 text-primary" />
         </div>

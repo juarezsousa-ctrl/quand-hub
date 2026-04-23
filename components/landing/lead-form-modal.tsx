@@ -77,7 +77,7 @@ export function LeadFormModal({ isOpen, onClose, cohortId, cohortName }: LeadFor
         }, 3000)
       }
     } catch (error) {
-      console.error('[v0] Lead submission error:', error)
+      console.error('[LEADS] Erro ao enviar lead:', error)
     } finally {
       setIsLoading(false)
     }

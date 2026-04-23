@@ -19,10 +19,6 @@ export default function CohortsPage() {
   const [cohorts, setCohorts] = useState<Cohort[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    fetchCohorts()
-  }, [])
-
   const fetchCohorts = async () => {
     try {
       const response = await fetch('/api/admin/cohorts')
@@ -31,11 +27,19 @@ export default function CohortsPage() {
         setCohorts(data)
       }
     } catch (error) {
-      console.error('[v0] Failed to fetch cohorts:', error)
+      console.error('[ADMIN] Falha ao buscar turmas:', error)
     } finally {
       setIsLoading(false)
     }
   }
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      void fetchCohorts()
+    }, 0)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [])
 
   const setActiveCohort = async (cohortId: string) => {
     try {
@@ -50,7 +54,7 @@ export default function CohortsPage() {
         setCohorts(updatedCohorts)
       }
     } catch (error) {
-      console.error('[v0] Failed to set active cohort:', error)
+      console.error('[ADMIN] Falha ao definir turma ativa:', error)
     }
   }
 

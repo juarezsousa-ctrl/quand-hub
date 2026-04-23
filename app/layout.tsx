@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { BRAND, BRAND_TITLE } from '@/src/application/config/branding'
 import './globals.css'
 
 const inter = Inter({ 
@@ -14,9 +15,19 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'QUAND HUB - Quem Aprende Não Depende',
-  description: 'Aprenda a usar IA para transformar processos manuais em sistemas simples, profissionais e úteis para o seu negócio.',
-  generator: 'v0.app',
+  applicationName: BRAND.name,
+  title: {
+    default: BRAND_TITLE,
+    template: `%s | ${BRAND.name}`,
+  },
+  description: BRAND.shortInstitutionalDescription,
+  openGraph: {
+    title: BRAND_TITLE,
+    description: BRAND.shortInstitutionalDescription,
+    siteName: BRAND.name,
+    locale: 'pt_BR',
+    type: 'website',
+  },
   icons: {
     icon: [
       {

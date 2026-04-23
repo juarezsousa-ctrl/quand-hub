@@ -1,7 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import { Sparkles, Instagram, Linkedin, Youtube, Mail, MapPin } from 'lucide-react'
 import type { SocialLink } from '@/src/domain/entities'
+import { BRAND, LANDING_NAV_LINKS } from '@/src/application/config/branding'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Instagram,
@@ -23,15 +25,15 @@ export function Footer({ text, socialLinks }: FooterProps) {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <a href="/" className="flex items-center gap-2 mb-4">
+            <Link href={BRAND.urls.home} className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-primary-foreground" />
               </div>
               <div className="flex flex-col">
-                <span className="font-bold text-lg leading-none">QUAND HUB</span>
-                <span className="text-[10px] text-muted-foreground leading-none mt-0.5">Quem Aprende Não Depende</span>
+                <span className="font-bold text-lg leading-none">{BRAND.name}</span>
+                <span className="text-[10px] text-muted-foreground leading-none mt-0.5">{BRAND.slogan}</span>
               </div>
-            </a>
+            </Link>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed mb-4">
               {text}
             </p>
@@ -59,10 +61,13 @@ export function Footer({ text, socialLinks }: FooterProps) {
           <div>
             <h4 className="font-semibold mb-4">Links</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#sobre" className="hover:text-foreground transition-colors">Sobre</a></li>
-              <li><a href="#aulas" className="hover:text-foreground transition-colors">Aulas</a></li>
-              <li><a href="#metodo" className="hover:text-foreground transition-colors">Método</a></li>
-              <li><a href="#faq" className="hover:text-foreground transition-colors">FAQ</a></li>
+              {LANDING_NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="hover:text-foreground transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -72,11 +77,11 @@ export function Footer({ text, socialLinks }: FooterProps) {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-primary" />
-                <span>contato@quandhub.com</span>
+                <span>{BRAND.contact.email}</span>
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-primary" />
-                <span>Brasil</span>
+                <span>{BRAND.location}</span>
               </li>
             </ul>
           </div>
@@ -84,10 +89,10 @@ export function Footer({ text, socialLinks }: FooterProps) {
 
         {/* Bottom */}
         <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>&copy; {currentYear} QUAND HUB. Todos os direitos reservados.</p>
+          <p>&copy; {currentYear} {BRAND.name}. Todos os direitos reservados.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground transition-colors">Privacidade</a>
-            <a href="#" className="hover:text-foreground transition-colors">Termos</a>
+            <a href={BRAND.urls.privacy} className="hover:text-foreground transition-colors">Privacidade</a>
+            <a href={BRAND.urls.terms} className="hover:text-foreground transition-colors">Termos</a>
           </div>
         </div>
       </div>
